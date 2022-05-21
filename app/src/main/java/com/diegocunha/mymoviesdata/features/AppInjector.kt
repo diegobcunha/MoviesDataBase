@@ -2,6 +2,7 @@ package com.diegocunha.mymoviesdata.features
 
 import android.app.Application
 import com.diegocunha.mymoviesdata.datasource.dataSourceModule
+import com.diegocunha.mymoviesdata.ui.uiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -12,7 +13,8 @@ object AppInjector {
 
     fun inject(application: Application) {
         application.startInjection(
-            dataSourceModule
+            dataSourceModule,
+            uiModule
         )
     }
 }
