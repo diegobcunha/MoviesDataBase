@@ -21,9 +21,7 @@ import androidx.compose.ui.graphics.Shape
 import com.diegocunha.mymoviesdata.ui.theme.MovieTheme
 
 /**
- * <a href="https://www.notion.so/warrenbrasil/Button-RoundedButton-Link-3234ac65fc3947fbb61367d1be900125" class="external" target="_blank">Nebraska Button</a>.
- *
- * Buttons allow the user execute an action with a single tap.
+ ** Buttons allow the user execute an action with a single tap.
  * Its recommended to use when you want to perform an action to navigate between screens, open itens or complete actions.
  *
  * @param onClick Will be called when the user clicks the button
