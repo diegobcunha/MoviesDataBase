@@ -10,7 +10,7 @@ import com.diegocunha.mymoviesdata.ui.extensions.setupContainerTransformEnterAni
 import com.diegocunha.mymoviesdata.ui.extensions.setupElevationScaleEnterAnimation
 import com.diegocunha.mymoviesdata.ui.extensions.setupFadeThroughEnterAnimation
 
-class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)

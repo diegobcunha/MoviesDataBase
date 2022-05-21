@@ -4,7 +4,6 @@ import android.content.res.Resources
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.diegocunha.mymoviesdata.R
@@ -17,7 +16,7 @@ import com.diegocunha.mymoviesdata.ui.extensions.getIntOrThrow
  * the toolbar yourself, use [ToolbarNavigationActivity]. In case there is only one fragment and there is no navigation
  * you should extend [SingleFragmentActivity].
  */
-open class NavigationActivity(@LayoutRes open val contentViewId: Int = R.layout.activity_navigation) : AppCompatActivity() {
+open class NavigationActivity(@LayoutRes open val contentViewId: Int = R.layout.activity_navigation) : BaseActivity() {
 
     open lateinit var navigationController: NavController
     protected open val navigationGraphId: Int by lazy { intent.getIntOrThrow(Navigable.GRAPH_ID_KEY) }
