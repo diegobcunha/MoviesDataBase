@@ -14,6 +14,12 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+        buildConfigField "String", "API_KEY", "\"1f54bd990f1cdfb230adb312546d765d\""
+        buildConfigField "String", "DEFAULT_LANGUAGE", "\"pt-BR\""
+        buildConfigField "String", "DEFAULT_REGION", "\"BR\""
+
         vectorDrawables {
             useSupportLibrary true
         }
@@ -69,6 +75,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:mockwebserver:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     implementation 'androidx.core:core-splashscreen:1.0.0-rc01'
 
     testImplementation "junit:junit:$junit_version"
