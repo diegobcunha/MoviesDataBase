@@ -152,3 +152,17 @@ fun <T> Result<T>.toGetState(): GetState<T> {
         onFailure = { GetState.failure(it) }
     )
 }
+
+/**
+ * Map function to map response
+ */
+fun <T, R> GetState<T>.map(mapBlock: (T?) -> R): GetState<R> {
+    return when (currentStatus()) {
+        GetStatus.FAILURE -> GetState.failure(failure)
+        GetStatus.INITIAL -> GetState.initial(initial)
+        GetStatus.SUCCESS -> {
+            val r = mapBlock(success)
+            GetState.success(r)
+        }
+    }
+}

@@ -6,7 +6,9 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -32,8 +34,8 @@ private const val DEFAULT_PLACEHOLDER_ROWS = 20
  * Show an entire list of rows placeholder
  */
 @Composable
-fun PlaceholderFullScreen(placeholder: @Composable () -> Unit) {
-    Column {
+fun PlaceholderFullScreen(modifier: Modifier = Modifier, placeholder: @Composable () -> Unit) {
+    Column(modifier = modifier) {
         for (index in 0..DEFAULT_PLACEHOLDER_ROWS) {
             if (index > 0) {
                 Divider()
@@ -75,13 +77,51 @@ fun TwoLineRowListPlaceholder() {
  */
 fun Modifier.rowTextPlaceholder(
     height: Dp,
+    shape: Shape = CircleShape,
     @FloatRange(from = 0.0, to = 1.0) widthFraction: Float = 1f
 ) = composed {
     fillMaxWidth(widthFraction)
         .height(height)
         .padding(2.dp)
-        .defaultPlaceholder(CircleShape)
+        .defaultPlaceholder(shape)
 }
+
+@Composable
+fun BoxPlaceHolder(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        for (index in 0..DEFAULT_PLACEHOLDER_ROWS) {
+            Row(
+                modifier = modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .weight(1f)
+                        .rowTextPlaceholder(
+                            shape = RoundedCornerShape(8.dp),
+                            height = 320.dp,
+                        )
+                )
+                Spacer(
+                    modifier = Modifier
+                        .weight(1f)
+                        .rowTextPlaceholder(
+                            shape = RoundedCornerShape(8.dp),
+                            height = 320.dp,
+                        )
+                )
+            }
+        }
+    }
+
+}
+
+@Preview
+@Composable
+private fun LoadingRowPreview() {
+    BoxPlaceHolder()
+}
+
 
 /**
  * Setup current modifier with default shimmer values (shape, colors and animation)

@@ -36,6 +36,24 @@ fun GetFailureHelper(
 }
 
 @Composable
+fun FailureHelper(
+    modifier: Modifier = Modifier,
+    onRetry: () -> Unit
+) {
+    Helper(
+        modifier = modifier.fillMaxHeight(),
+        image = { FailureIcon() },
+        title = { Text(stringResource(id = R.string.error)) },
+        subtitle = { Text(stringResource(id = R.string.resources_error_default_subtitle)) },
+        action = {
+            Button(onClick = onRetry) {
+                Text(stringResource(id = R.string.resources_try_again))
+            }
+        }
+    )
+}
+
+@Composable
 private fun FailureIcon() {
     HelperIcon(
         painter = painterResource(id = R.drawable.ic_reject),

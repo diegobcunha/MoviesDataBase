@@ -1,12 +1,11 @@
 package com.diegocunha.mymoviesdata.ui.components
 
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 
 /**
  * A default Scaffold View to be used in screens.
@@ -22,7 +21,7 @@ fun DefaultScaffoldTopBar(
 ) {
     Scaffold(
         scaffoldState = scaffoldState,
-        modifier = Modifier.padding(bottom = 16.dp),
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             DefaultTopAppBar(
                 navigationIcon = navigationIcon,
