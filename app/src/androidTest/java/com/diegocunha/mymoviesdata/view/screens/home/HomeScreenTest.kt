@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.dp
@@ -18,7 +17,7 @@ import org.junit.Test
 class HomeScreenTest : BaseComposeTest() {
 
     @Test
-    fun shouldRenderBasicMovieInformation() = with(composeTestRule) {
+    fun shouldRenderBasicMovieInformation() {
         val movie = MovieViewData(
             id = 1337,
             title = "Movie Name",
@@ -26,13 +25,19 @@ class HomeScreenTest : BaseComposeTest() {
             poster = "",
         )
 
-        renderMovieContent(movie)
+        composeTestRule.setTestContent {
+            Box {
+                Box(Modifier.padding(72.dp)) {
+                    Movie(movie, {})
+                }
+            }
+        }
 
-        onNodeWithText(movie.title, useUnmergedTree = true).assertIsDisplayed()
+        composeTestRule.onNodeWithText(movie.title).assertIsDisplayed()
     }
 
     @Test
-    fun shouldInteractWhenUserClicks() = with(composeTestRule) {
+    fun shouldInteractWhenUserClicks() {
         val state = mutableStateOf(false)
 
         val movie = MovieViewData(
@@ -42,23 +47,17 @@ class HomeScreenTest : BaseComposeTest() {
             poster = "",
         )
 
-        renderMovieContent(movie) {
-            state.value = true
+        composeTestRule.setTestContent {
+            Box {
+                Box(Modifier.padding(72.dp)) {
+                    Movie(movie) {
+                        state.value = true
+                    }
+                }
+            }
         }
-
-        val node = onNodeWithText(movie.title, useUnmergedTree = true)
+        val node = composeTestRule.onNodeWithText(movie.title)
         node.performClick()
         assertTrue(state.value)
-    }
-
-    @Test
-
-    private fun ComposeContentTestRule.renderMovieContent(
-        movie: MovieViewData,
-        onClick: (Long) -> Unit = {}
-    ) = setTestContent {
-        Box(Modifier.padding(72.dp)) {
-            Movie(movie, onClick)
-        }
     }
 }

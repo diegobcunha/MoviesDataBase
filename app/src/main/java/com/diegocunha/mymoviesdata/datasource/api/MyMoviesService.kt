@@ -16,7 +16,5 @@ interface MyMoviesService {
     @GET("movie/{id}")
     suspend fun movie(
         @Path("id") id: Long,
-        @Query("api_key") apiKey: String,
-        @Query("language") language: String
     ): Result<Movie>
 }

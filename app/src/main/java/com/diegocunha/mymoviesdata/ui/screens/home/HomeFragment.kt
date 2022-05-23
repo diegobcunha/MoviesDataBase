@@ -1,12 +1,17 @@
 package com.diegocunha.mymoviesdata.ui.screens.home
 
 import androidx.compose.runtime.Composable
+import com.diegocunha.mymoviesdata.ui.extensions.navigateWithSharedAxisZ
 import com.diegocunha.mymoviesdata.ui.templates.fragment.ComposableFragment
 
-class HomeFragment: ComposableFragment() {
+class HomeFragment : ComposableFragment() {
 
     @Composable
     override fun ComposableContent() {
-        HomeScreen()
+        HomeScreen() {
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(it.second, it.first)
+            navigateWithSharedAxisZ(action)
+        }
     }
 }

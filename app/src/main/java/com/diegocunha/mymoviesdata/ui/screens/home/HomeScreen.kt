@@ -47,13 +47,13 @@ private const val COLUMN_COUNT = 2
 private val GRID_SPACING = 8.dp
 
 @Composable
-internal fun HomeScreen() {
+internal fun HomeScreen(onMovieSelected: (Pair<String, Long>) -> Unit) {
     val viewModel = getViewModel<HomeViewModel>()
-    Screen(viewModel = viewModel)
+    Screen(viewModel = viewModel, onMovieSelected)
 }
 
 @Composable
-private fun Screen(viewModel: HomeViewModel) {
+private fun Screen(viewModel: HomeViewModel, onMovieSelected: (Pair<String, Long>) -> Unit) {
     val items = viewModel.pagingFlow.collectAsLazyPagingItems()
 
     val listState = rememberLazyListState()
@@ -61,13 +61,17 @@ private fun Screen(viewModel: HomeViewModel) {
     DefaultScaffoldTopBar(
         title = { Text(text = stringResource(id = R.string.app_name)) },
         body = {
-            MovieContentBody(items, listState)
+            MovieContentBody(items, listState, onMovieSelected)
         }
     )
 }
 
 @Composable
-private fun MovieContentBody(items: LazyPagingItems<MovieViewData>, listState: LazyListState) {
+private fun MovieContentBody(
+    items: LazyPagingItems<MovieViewData>,
+    listState: LazyListState,
+    onMovieSelected: (Pair<String, Long>) -> Unit
+) {
     when (items.loadState.refresh) {
         is LoadState.Loading -> {
             PlaceholderFullScreen {
@@ -78,14 +82,18 @@ private fun MovieContentBody(items: LazyPagingItems<MovieViewData>, listState: L
             FailureHelper(onRetry = { items.retry() })
         }
         else -> {
-            MovieGridList(items, listState)
+            MovieGridList(items, listState, onMovieSelected)
         }
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun MovieGridList(items: LazyPagingItems<MovieViewData>, listState: LazyListState) {
+private fun MovieGridList(
+    items: LazyPagingItems<MovieViewData>,
+    listState: LazyListState,
+    onMovieSelected: (Pair<String, Long>) -> Unit
+) {
     LazyVerticalGrid(
         state = listState,
         cells = GridCells.Fixed(COLUMN_COUNT),
@@ -99,7 +107,7 @@ private fun MovieGridList(items: LazyPagingItems<MovieViewData>, listState: Lazy
             items(items.itemCount) { movieIndex ->
                 val movie = items.peek(movieIndex) ?: return@items
                 Movie(movie, onClick = {
-
+                    onMovieSelected(movie.title to movie.id)
                 })
 
                 renderLoading(

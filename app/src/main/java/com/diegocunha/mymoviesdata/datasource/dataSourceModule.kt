@@ -4,6 +4,9 @@ import com.diegocunha.mymoviesdata.BuildConfig
 import com.diegocunha.mymoviesdata.coroutines.DispatchersProvider
 import com.diegocunha.mymoviesdata.datasource.api.CallAdapterFactory
 import com.diegocunha.mymoviesdata.datasource.api.MyMoviesService
+import com.diegocunha.mymoviesdata.datasource.mapper.ImageMapper
+import com.diegocunha.mymoviesdata.datasource.mapper.MovieMapper
+import com.diegocunha.mymoviesdata.datasource.movie.MovieDetailUseCase
 import com.diegocunha.mymoviesdata.datasource.movie.MoviesSource
 import com.diegocunha.mymoviesdata.datasource.movie.MoviesUseCase
 import com.diegocunha.mymoviesdata.templates.ProductionDispatchersProvider
@@ -25,16 +28,22 @@ val dataSourceModule = module {
     single { GsonBuilder().create() }
 
     factory {
-       okHttp3()
+        okHttp3()
     }
 
     single { retrofit(get(), get()).create(MyMoviesService::class.java) }
+
+    single { ImageMapper() }
+
+    single { MovieMapper(get()) }
 
     factory<DispatchersProvider> { ProductionDispatchersProvider }
 
     factory { MoviesSource(get()) }
 
-    factory { MoviesUseCase(get()) }
+    factory { MoviesUseCase(get(), get()) }
+
+    factory { MovieDetailUseCase(get(), get()) }
 }
 
 private fun Scope.okHttp3(): OkHttpClient {

@@ -1,6 +1,7 @@
 package com.diegocunha.mymoviesdata.datasource
 
 import com.diegocunha.mymoviesdata.datasource.api.MyMoviesService
+import com.diegocunha.mymoviesdata.datasource.mapper.MovieMapper
 import com.diegocunha.mymoviesdata.datasource.movie.MoviesUseCase
 import com.diegocunha.mymoviesdata.fixtures.upComingFixture
 import com.diegocunha.mymoviesdata.helpers.BaseUnitTest
@@ -20,12 +21,13 @@ import org.junit.runners.JUnit4
 class MoviesUseCaseTest : BaseUnitTest() {
 
     private val apiService: MyMoviesService = mockk(relaxed = true)
+    private val movieMapper: MovieMapper = mockk()
     private lateinit var useCase: MoviesUseCase
 
     @Before
     fun setup() {
         clearAllMocks()
-        useCase = MoviesUseCase(apiService)
+        useCase = MoviesUseCase(apiService, movieMapper)
     }
 
     @Test
