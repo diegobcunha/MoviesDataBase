@@ -1,6 +1,7 @@
 package com.diegocunha.mymoviesdata.datasource
 
 import com.diegocunha.mymoviesdata.datasource.api.MyMoviesService
+import com.diegocunha.mymoviesdata.datasource.mapper.ImageMapper
 import com.diegocunha.mymoviesdata.datasource.mapper.MovieMapper
 import com.diegocunha.mymoviesdata.datasource.movie.MovieDetailUseCase
 import com.diegocunha.mymoviesdata.fixtures.movie
@@ -21,7 +22,7 @@ class MovieDetailUseCaseTest : BaseUnitTest() {
 
     private lateinit var useCase: MovieDetailUseCase
     private val apiService = mockk<MyMoviesService>(relaxed = true)
-    private val mapper = mockk<MovieMapper>()
+    private val mapper = MovieMapper(ImageMapper())
 
     @Before
     fun setup() {
