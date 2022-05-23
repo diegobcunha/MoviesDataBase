@@ -2,7 +2,7 @@ package com.diegocunha.mymoviesdata.datasource.model
 
 import com.google.gson.annotations.SerializedName
 
-data class UpcomingMoviesResponse(
+data class DiscoverMoviesResponse(
     override var page: Int,
     override val results: List<Movie>,
     @SerializedName("total_pages") override val totalPages: Int,

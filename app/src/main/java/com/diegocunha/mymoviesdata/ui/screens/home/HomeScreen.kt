@@ -119,7 +119,7 @@ private fun MovieGridList(items: LazyPagingItems<MovieViewData>, listState: Lazy
 }
 
 @Composable
-private fun Movie(movie: MovieViewData, onClick: (Long) -> Unit) {
+fun Movie(movie: MovieViewData, onClick: (Long) -> Unit) {
     CardBox(
         modifier = Modifier
             .height(360.dp)
