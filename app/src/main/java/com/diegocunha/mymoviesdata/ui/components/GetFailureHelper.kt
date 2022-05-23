@@ -29,7 +29,7 @@ fun GetFailureHelper(
         subtitle = { Text(stringResource(id = R.string.resources_error_default_subtitle)) },
         action = {
             Button(onClick = onRetry, loading = getFailure.retrying) {
-                Text(stringResource(id = R.string.resources_try_again))
+                Text(stringResource(id = R.string.resources_try_again), color = MovieTheme.colors.text.negative)
             }
         }
     )
