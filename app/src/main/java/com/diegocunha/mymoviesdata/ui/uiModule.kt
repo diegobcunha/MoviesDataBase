@@ -9,5 +9,5 @@ val uiModule = module {
 
     viewModel { HomeViewModel(get(), get()) }
 
-    viewModel{ (movieId: Long) -> MovieDetailViewModel(get(), movieId) }
+    viewModel{ (movieId: Long) -> MovieDetailViewModel(get(), get(), movieId) }
 }

@@ -34,3 +34,13 @@ val upComingFixture = DiscoverMoviesResponse(
     1,
     20
 )
+
+val movieViewModel = MovieViewModel(
+    1L,
+    "title",
+    "overview",
+    "posterPath",
+    "releaseDate"
+)
+
+val movieViewModelList = listOf(movieViewModel)
