@@ -1,7 +1,6 @@
 package com.diegocunha.mymoviesdata.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -43,8 +42,7 @@ fun ImageLoader(
     }
 
     Image(
-        modifier = modifier
-            .fillMaxSize(),
+        modifier = modifier,
         painter = painter,
         contentDescription = contentDescription,
         contentScale = scale,

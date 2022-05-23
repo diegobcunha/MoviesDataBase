@@ -114,7 +114,8 @@ data class GroupBase(
     val secondaryActive: Color,
     val overSecondary: Color,
     val disabled: Color,
-    val overDisabled: Color
+    val overDisabled: Color,
+    val overImage: Color
 ) {
     internal companion object : Mode<GroupBase> {
         override val lightMode = GroupBase(
@@ -127,7 +128,8 @@ data class GroupBase(
             secondaryActive = Color(0xFF4A4B52),
             overSecondary = Color(0xFFFFFFFF),
             disabled = Color(0xFFC9CAD4),
-            overDisabled = Color(0xFF9599A6)
+            overDisabled = Color(0xFF9599A6),
+            overImage = Color(0x97000000)
         )
         override val darkMode = GroupBase(
             primary = Color(0xFF2F2F33),
@@ -139,7 +141,8 @@ data class GroupBase(
             secondaryActive = Color(0xFF2F2F33),
             overSecondary = Color(0xFFFFFFFF),
             disabled = Color(0xFF5C5D66),
-            overDisabled = Color(0xFF9599A6)
+            overDisabled = Color(0xFF9599A6),
+            overImage = Color(0x97000000)
         )
     }
 }

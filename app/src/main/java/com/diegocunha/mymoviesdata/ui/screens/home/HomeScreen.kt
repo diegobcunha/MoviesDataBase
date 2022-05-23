@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,7 +23,6 @@ import androidx.compose.material.icons.filled.Movie
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -136,25 +136,26 @@ fun Movie(movie: MovieViewData, onClick: (Long) -> Unit) {
         content = {
             Box {
                 ImageLoader(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .fillMaxSize(),
                     painter = rememberAsyncImagePainter(
                         model = movie.poster,
                         error = rememberVectorPainter(Icons.Filled.BrokenImage),
                         placeholder = rememberVectorPainter(Icons.Default.Movie)
                     ),
                     contentDescription = movie.title,
-
-                    modifier = Modifier
-                        .align(Alignment.Center)
                 )
 
 
                 Spacer(modifier = Modifier.height(4.dp))
+
                 Column(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .fillMaxWidth()
-                        .background(Color(0x97000000))
+                        .background(MovieTheme.colors.base.overImage)
                         .padding(horizontal = 6.dp, vertical = 4.dp)
                 ) {
                     Text(

@@ -56,7 +56,7 @@ fun Helper(
                 image()
             }
             StyledText(
-                textStyle = MovieTheme.typography.h1.copy(fontSize = 32.sp),
+                textStyle = MovieTheme.typography.h1.copy(fontSize = 32.sp, textAlign = TextAlign.Center),
                 contentColor = MovieTheme.colors.text.primary,
                 alpha = ContentAlpha.high,
                 content = title
@@ -77,18 +77,20 @@ fun Helper(
 /**
  * Default icon setup for Helper, using the right size, shape and alignment for painters
  *
+ * @param modifier Modifier to be used at box
  * @param painter - the painter icon to be used
  * @param backgroundColor - color of circular background
  * @param statusTint - color to be applied as painter tint
  */
 @Composable
 fun HelperIcon(
+    modifier: Modifier = Modifier,
     painter: Painter,
     backgroundColor: Color,
     statusTint: Color = backgroundColor
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .background(
                 color = backgroundColor,
                 shape = CircleShape
