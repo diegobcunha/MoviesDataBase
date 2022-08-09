@@ -11,10 +11,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.GridItemSpan
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -56,7 +54,7 @@ internal fun HomeScreen(onMovieSelected: (Pair<String, Long>) -> Unit) {
 private fun Screen(viewModel: HomeViewModel, onMovieSelected: (Pair<String, Long>) -> Unit) {
     val items = viewModel.pagingFlow.collectAsLazyPagingItems()
 
-    val listState = rememberLazyListState()
+    val listState = rememberLazyGridState()
 
     DefaultScaffoldTopBar(
         title = { Text(text = stringResource(id = R.string.app_name)) },
@@ -69,7 +67,7 @@ private fun Screen(viewModel: HomeViewModel, onMovieSelected: (Pair<String, Long
 @Composable
 private fun MovieContentBody(
     items: LazyPagingItems<MovieViewData>,
-    listState: LazyListState,
+    listState: LazyGridState,
     onMovieSelected: (Pair<String, Long>) -> Unit
 ) {
     when (items.loadState.refresh) {
@@ -91,12 +89,12 @@ private fun MovieContentBody(
 @Composable
 private fun MovieGridList(
     items: LazyPagingItems<MovieViewData>,
-    listState: LazyListState,
+    listState: LazyGridState,
     onMovieSelected: (Pair<String, Long>) -> Unit
 ) {
     LazyVerticalGrid(
         state = listState,
-        cells = GridCells.Fixed(COLUMN_COUNT),
+        columns = GridCells.Fixed(COLUMN_COUNT),
         horizontalArrangement = Arrangement.spacedBy(GRID_SPACING, Alignment.CenterHorizontally),
         contentPadding = PaddingValues(
             start = GRID_SPACING,
@@ -112,13 +110,11 @@ private fun MovieGridList(
 
                 renderLoading(
                     modifier = Modifier.padding(vertical = GRID_SPACING),
-                    span = { GridItemSpan(COLUMN_COUNT) },
                     loadState = items.loadState
                 )
 
                 renderError(
                     modifier = Modifier.padding(vertical = GRID_SPACING),
-                    span = { GridItemSpan(COLUMN_COUNT) },
                     loadState = items.loadState
                 )
             }

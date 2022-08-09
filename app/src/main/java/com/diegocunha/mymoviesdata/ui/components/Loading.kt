@@ -2,9 +2,10 @@ package com.diegocunha.mymoviesdata.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.GridItemSpan
-import androidx.compose.foundation.lazy.LazyGridItemSpanScope
-import androidx.compose.foundation.lazy.LazyGridScope
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridItemScope
+import androidx.compose.foundation.lazy.grid.LazyGridItemSpanScope
+import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
@@ -36,14 +37,12 @@ fun LoadingCircular(
 }
 
 @OptIn(ExperimentalFoundationApi::class)
-fun LazyGridScope.renderLoading(
+@Composable
+fun LazyGridItemScope.renderLoading(
     modifier: Modifier = Modifier,
-    span: (LazyGridItemSpanScope) -> GridItemSpan,
     loadState: CombinedLoadStates
 ) {
     if (loadState.append !is LoadState.Loading) return
 
-    item(span = span) {
-        LoadingCircular(modifier = modifier)
-    }
+    LoadingCircular(modifier = modifier)
 }

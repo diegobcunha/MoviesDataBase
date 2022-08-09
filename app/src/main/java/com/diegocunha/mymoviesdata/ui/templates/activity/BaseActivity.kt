@@ -52,6 +52,7 @@ abstract class BaseActivity : AppCompatActivity() {
             ActivityTransitionType.FADE_THROUGH -> {
                 setupFadeThroughEnterAnimation()
             }
+            else -> Unit
         }
     }
 

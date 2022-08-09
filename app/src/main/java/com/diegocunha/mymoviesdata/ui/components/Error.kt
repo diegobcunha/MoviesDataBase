@@ -1,14 +1,8 @@
 package com.diegocunha.mymoviesdata.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.GridItemSpan
-import androidx.compose.foundation.lazy.LazyGridItemSpanScope
-import androidx.compose.foundation.lazy.LazyGridScope
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -40,15 +34,14 @@ fun ErrorRow(modifier: Modifier = Modifier, title: String) {
 }
 
 @OptIn(ExperimentalFoundationApi::class)
-fun LazyGridScope.renderError(
+@Composable
+fun LazyGridItemScope.renderError(
     modifier: Modifier = Modifier,
-    span: (LazyGridItemSpanScope) -> GridItemSpan,
-    loadState: CombinedLoadStates) {
+    loadState: CombinedLoadStates
+) {
     val message = (loadState.append as? LoadState.Error)?.error?.message ?: return
 
-    item(span = span) {
-        ErrorRow(title = message, modifier = modifier)
-    }
+    ErrorRow(title = message, modifier = modifier)
 }
 
 @Preview(showSystemUi = true)
